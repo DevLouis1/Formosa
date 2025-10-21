@@ -1,0 +1,17 @@
+.IntroText {
+    font-size: clamp(24px, 5vw, 50px);
+    color: #dbe9f4;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    animation: Intro-fade-in 2s ease-in;
+    max-width: 90vw;
+}
+@keyframes Intro-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

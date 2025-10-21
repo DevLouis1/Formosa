@@ -2,6 +2,27 @@
   text-align: center;
 }
 
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  width: 100vw;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
