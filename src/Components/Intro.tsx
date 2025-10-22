@@ -43,6 +43,13 @@ export default function INTRO(): JSX.Element {
 
   return (
     <div className='intro-container' ref={containerRef}>
+      {/* Floating geometric shapes */}
+      <div className='floating-shape shape-1'></div>
+      <div className='floating-shape shape-2'></div>
+      <div className='floating-shape shape-3'></div>
+      <div className='floating-shape shape-4'></div>
+      <div className='floating-shape shape-5'></div>
+      
       <img ref={logoRef} src={logo} alt="Background Logo" className='background-logo' />
       <img src={vector1} alt="Vector Design 1" className='vector-1' />
       <img src={vector2} alt="Vector Design 2" className='vector-2' />

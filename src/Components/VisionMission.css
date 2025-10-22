@@ -4,7 +4,12 @@
     align-items: center;
     justify-content: center;
     padding: 100px 40px 40px 40px;
-    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    background: linear-gradient(135deg, 
+        #0a1f2e 0%, 
+        #1a3a4a 25%,
+        #203a43 50%, 
+        #2c5364 75%,
+        #1e4e5c 100%);
     scroll-margin-top: 80px;
     position: relative;
     overflow: hidden;
