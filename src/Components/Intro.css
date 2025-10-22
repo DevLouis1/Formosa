@@ -1,17 +1,262 @@
-.IntroText {
-    font-size: clamp(24px, 5vw, 50px);
-    color: #dbe9f4;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-    animation: Intro-fade-in 2s ease-in;
-    max-width: 90vw;
+.intro-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 }
-@keyframes Intro-fade-in {
+
+.background-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(250px, 45vw, 700px);
+    height: clamp(350px, 65vh, 900px);
+    object-fit: contain;
+    opacity: 0;
+    z-index: 1;
+    animation: fade-in-scale 2s ease-out 0.3s forwards;
+    transition: transform 0.3s ease-out;
+    filter: drop-shadow(0 0 30px rgba(169, 214, 228, 0.2));
+}
+
+.IntroText {
+    transform: translateY(-50%);
+    font-size: clamp(28px, 5vw, 56px);
+    color: #dbe9f4;
+    background: linear-gradient(90deg, 
+        rgba(15, 32, 39, 0.12) 0%, 
+        rgba(32, 58, 67, 0.15) 50%, 
+        rgba(44, 83, 100, 0.12) 100%);
+    backdrop-filter: blur(3px);
+    border: none;
+    border-top: 1px solid rgba(219, 233, 244, 0.1);
+    border-bottom: 1px solid rgba(219, 233, 244, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin: 0;
+    padding: clamp(30px, 5vh, 60px) clamp(20px, 8vw, 80px);
+    animation: slide-in-left 1.2s ease-out 0.6s forwards;
+    opacity: 0;
+    width: 50vw;
+    max-width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    border-radius: 0 30px 30px 0;
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.IntroText:hover {
+    transform: translateY(-50%) translateX(5px);
+    box-shadow: 0 8px 40px rgba(169, 214, 228, 0.15);
+    border-color: rgba(169, 214, 228, 0.3);
+}
+
+.IntroText p {
+    margin: 0;
+    line-height: 1.4;
+    padding-bottom: 0.1em;
+    color: #dbe9f4;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.chinese-intro {
+    font-size: clamp(16px, 2.5vw, 28px);
+    opacity: 0.9;
+    margin-top: 10px !important;
+}
+.text-background {
+    color: #dbe9f4;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    width: 52vw;
+    height: 35vh;
+    background: transparent;
+    border-color: white;
+    border-radius: 0 50% 50% 0;
+    z-index: 999;
+}
+
+.ellipse {
+    width: clamp(80px, 15vw, 150px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0.9;
+    animation: float 3s ease-in-out infinite;
+}
+
+.vector-1 {
+    position: absolute;
+    bottom: -40%;
+    left: -10%;
+    width: clamp(180px, 25vw, 350px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: fade-in-float 1.5s ease-out 0.8s forwards, float-slow 4s ease-in-out 2.3s infinite;
+    z-index: 5;
+}
+
+.vector-2 {
+    position: absolute;
+    bottom: -70%;
+    left: -20%;
+    width: clamp(220px, 35vw, 500px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: fade-in-float 1.5s ease-out 1s forwards, float-slow 4.5s ease-in-out 2.5s infinite reverse;
+    z-index: 5;
+}
+.vector-3 {
+    position: absolute;
+    bottom: 0%;
+    right: -2%;
+    width: clamp(180px, 25vw, 350px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: fade-in-float 1.5s ease-out 1.2s forwards, float-slow 4s ease-in-out 2.7s infinite;
+    z-index: 5;
+}
+.vector-4 {
+    position: absolute;
+    bottom: 12%;
+    right: -2%;
+    width: clamp(180px, 25vw, 350px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: fade-in-float 1.5s ease-out 1.4s forwards, float-slow 4.5s ease-in-out 2.9s infinite reverse;
+    z-index: 5;
+}
+.ellipse-design{
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    width: clamp(150px, 30vw, 350px);
+    height: clamp(150px, 30vw, 350px);
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(219, 233, 244, 0.15) 25%, 
+        rgba(169, 214, 228, 0.1) 50%,
+        rgba(100, 150, 180, 0.05) 70%,
+        transparent 100%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: fade-glow 2s ease-out 1.6s forwards, float-glow 4s ease-in-out 3.6s infinite;
+    z-index: 1000;
+    filter: blur(20px);
+}
+
+@keyframes float-glow {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        filter: blur(20px) brightness(1);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.1);
+        filter: blur(25px) brightness(1.3);
+    }
+}
+@keyframes fade-in-scale {
     from {
         opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-100px) translateY(-50%);
     }
     to {
         opacity: 1;
+        transform: translateX(0) translateY(-50%);
+    }
+}
+
+@keyframes fade-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-float {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-glow {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes float-slow {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(3deg);
+    }
+}
+
+@keyframes float-slow-rotated {
+    0%, 100% {
+        transform: translateY(0px) rotate(145deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(148deg);
     }
 }

@@ -2,25 +2,271 @@
   text-align: center;
 }
 
-html, body, #root {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   width: 100%;
-  overflow: hidden;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 #root {
-  height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile browsers */
-  width: 100vw;
+  width: 100%;
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+/* Loading Screen Styles - CRAZY EDITION 🚀 */
+.loading-container {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364, #203a43, #0f2027);
+  background-size: 400% 400%;
+  animation: gradient-wave 3s ease infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Floating particles in background */
+.loading-container::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(169, 214, 228, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(169, 214, 228, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(169, 214, 228, 0.12) 0%, transparent 50%);
+  animation: float-around 20s linear infinite;
+}
+
+.loading-container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(15, 32, 39, 0.5) 100%);
+  pointer-events: none;
+}
+
+/* Multi-ring spinner system */
+.spinner {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner::before,
+.spinner::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+
+/* Outer ring - fast reverse spin */
+.spinner::before {
+  width: 150px;
+  height: 150px;
+  border-top-color: #a9d6e4;
+  border-right-color: #a9d6e4;
+  animation: spin-reverse 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  filter: drop-shadow(0 0 10px rgba(169, 214, 228, 0.5));
+}
+
+/* Middle ring - medium spin with pulse */
+.spinner::after {
+  width: 100px;
+  height: 100px;
+  border-left-color: #dbe9f4;
+  border-bottom-color: #dbe9f4;
+  animation: spin-pulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(219, 233, 244, 0.6));
+}
+
+/* Inner core - rotating square that becomes circle */
+.spinner {
+  animation: morph-rotate 2s ease-in-out infinite;
+}
+
+.spinner::before {
+  box-shadow: 
+    0 0 20px rgba(169, 214, 228, 0.3),
+    inset 0 0 20px rgba(169, 214, 228, 0.1);
+}
+
+/* Loading text with glitch effect */
+.loading-text {
+  margin-top: 50px;
+  font-size: clamp(24px, 3vw, 36px);
+  color: #dbe9f4;
+  font-weight: 300;
+  letter-spacing: 8px;
+  position: relative;
+  z-index: 10;
+  animation: glitch-text 2s ease-in-out infinite;
+  text-shadow: 
+    0 0 10px rgba(169, 214, 228, 0.5),
+    0 0 20px rgba(169, 214, 228, 0.3),
+    0 0 30px rgba(169, 214, 228, 0.2);
+}
+
+.loading-text::before,
+.loading-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-text::before {
+  animation: glitch-1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  color: #a9d6e4;
+  z-index: -1;
+}
+
+.loading-text::after {
+  animation: glitch-2 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+  color: rgba(169, 214, 228, 0.5);
+  z-index: -2;
+}
+
+/* Crazy Keyframe Animations */
+@keyframes gradient-wave {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-around {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  0% {
+    transform: rotate(360deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes spin-pulse {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+    opacity: 0.5;
+  }
+}
+
+@keyframes morph-rotate {
+  0%, 100% {
+    border-radius: 50%;
+    transform: rotate(0deg);
+  }
+  25% {
+    border-radius: 30%;
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    border-radius: 10%;
+    transform: rotate(180deg) scale(0.9);
+  }
+  75% {
+    border-radius: 30%;
+    transform: rotate(270deg) scale(1.1);
+  }
+}
+
+@keyframes glitch-text {
+  0%, 90%, 100% {
+    transform: translate(0, 0) scale(1);
+    filter: blur(0);
+  }
+  20% {
+    transform: translate(-2px, 2px) scale(1.02);
+  }
+  40% {
+    transform: translate(2px, -2px) scale(0.98);
+  }
+  60% {
+    transform: translate(-2px, -2px) scale(1.01);
+    filter: blur(1px);
+  }
+  80% {
+    transform: translate(2px, 2px) scale(0.99);
+  }
+}
+
+@keyframes glitch-1 {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  20% {
+    clip-path: inset(40% 0 30% 0);
+    transform: translate(-3px, 3px);
+  }
+  40% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate(3px, -3px);
+  }
+  60% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(-3px, -3px);
+  }
+  80% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(3px, 3px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  20% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(2px, -2px);
+  }
+  40% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(2px, 2px);
+  }
+  80% {
+    clip-path: inset(70% 0 10% 0);
+    transform: translate(-2px, -2px);
+  }
 }
 
 .App-logo {
