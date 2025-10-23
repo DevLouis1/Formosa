@@ -9,19 +9,28 @@ import Contributors from './Components/Contributors';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Simulate loading time for assets
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2500); // 2.5 seconds to enjoy the crazy animation
+    // Start fade out animation
+    const fadeTimer = setTimeout(() => {
+      setFadeOut(true);
+    }, 2500);
 
-    return () => clearTimeout(timer);
+    // Remove loading screen after fade completes
+    const removeTimer = setTimeout(() => {
+      setLoading(false);
+    }, 3500); // 2.5s loading + 1s fade out
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+    };
   }, []);
 
   if (loading) {
     return (
-      <div className="loading-container">
+      <div className={`loading-container ${fadeOut ? 'fade-out' : ''}`}>
         <div className="spinner"></div>
         <p className="loading-text" data-text="IMAGINATING...">IMAGINATING...</p>
       </div>

@@ -16,6 +16,14 @@
         #162838 100%);
     background-size: 400% 400%;
     animation: intro-gradient-wave 15s ease infinite;
+    opacity: 0;
+    animation: intro-fade-in 1.2s ease-out forwards;
+}
+
+@keyframes intro-fade-in {
+    to {
+        opacity: 1;
+    }
 }
 
 /* Animated background particles */
@@ -74,9 +82,25 @@
     object-fit: contain;
     opacity: 0;
     z-index: 1;
-    animation: fade-in-scale 2s ease-out 0.3s forwards;
+    animation: logo-reveal 2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     transition: transform 0.3s ease-out;
     filter: drop-shadow(0 0 30px rgba(169, 214, 228, 0.2));
+}
+
+@keyframes logo-reveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+        filter: drop-shadow(0 0 50px rgba(169, 214, 228, 0.8)) blur(10px);
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 30px rgba(169, 214, 228, 0.2));
+    }
 }
 
 .IntroText {

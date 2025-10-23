@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  animation: fade-in-app 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fade-in-app {
+  to {
+    opacity: 1;
+  }
 }
 
 html, body {
@@ -31,6 +39,13 @@ html, body {
   align-items: center;
   z-index: 9999;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.loading-container.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
 }
 
 /* Floating particles in background */
@@ -63,6 +78,12 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.loading-container.fade-out .spinner {
+  opacity: 0;
+  transform: scale(0.5) rotate(180deg);
 }
 
 .spinner::before,
@@ -118,6 +139,12 @@ html, body {
     0 0 10px rgba(169, 214, 228, 0.5),
     0 0 20px rgba(169, 214, 228, 0.3),
     0 0 30px rgba(169, 214, 228, 0.2);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.loading-container.fade-out .loading-text {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.8);
 }
 
 .loading-text::before,
