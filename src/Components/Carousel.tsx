@@ -37,6 +37,7 @@ export default function Carousel({
   const [dragDX, setDragDX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [noTransition, setNoTransition] = useState(false);
+  const dragRaf = useRef<number | null>(null);
 
   // Determine slides per view responsively
   useEffect(() => {
@@ -91,26 +92,28 @@ export default function Carousel({
   const onTouchMove = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
-    setDragDX(touchDeltaX.current);
+    if (dragRaf.current != null) cancelAnimationFrame(dragRaf.current);
+    dragRaf.current = requestAnimationFrame(() => setDragDX(touchDeltaX.current));
   };
 
   const onTouchEnd = () => {
-    const threshold = 80; // require a bit more distance
+    const threshold = 120; // require larger movement to advance
     const dx = touchDeltaX.current;
     const dt = Math.max(1, Date.now() - touchStartTime.current); // ms
     const velocity = Math.abs(dx) / dt; // px per ms
     // Estimate slide width to decide if we should jump 2 slides
     const width = containerRef.current?.offsetWidth ?? 0;
     const perSlide = slidesPerView > 0 ? width / slidesPerView : width;
-    let steps = 0;
-    if (Math.abs(dx) > threshold || velocity > 0.9) steps = 1;
-    if (Math.abs(dx) > perSlide * 0.8 || velocity > 1.5) steps = 2;
+  let steps = 0;
+  if (Math.abs(dx) > threshold || velocity > 1.2) steps = 1;
+  if (Math.abs(dx) > perSlide * 0.9 || velocity > 1.8) steps = 2;
 
     if (dx > 0 && steps > 0) go(-steps);
     if (dx < 0 && steps > 0) go(steps);
     touchStartX.current = null;
     touchDeltaX.current = 0;
-    setDragDX(0);
+    if (dragRaf.current != null) cancelAnimationFrame(dragRaf.current);
+    dragRaf.current = requestAnimationFrame(() => setDragDX(0));
     setIsDragging(false);
     if (pauseOnHover) setTimeout(() => setIsHovered(false), 100);
   };
@@ -129,7 +132,8 @@ export default function Carousel({
   const onPointerMove = (e: React.PointerEvent) => {
     if (pointerStartX.current == null) return;
     const dx = e.clientX - pointerStartX.current;
-    setDragDX(dx);
+    if (dragRaf.current != null) cancelAnimationFrame(dragRaf.current);
+    dragRaf.current = requestAnimationFrame(() => setDragDX(dx));
   };
   const onPointerUp = (e: React.PointerEvent) => {
     if (pointerStartX.current == null) return;
@@ -138,13 +142,14 @@ export default function Carousel({
     const velocity = Math.abs(dx) / dt;
     const width = containerRef.current?.offsetWidth ?? 0;
     const perSlide = slidesPerView > 0 ? width / slidesPerView : width;
-    let steps = 0;
-    if (Math.abs(dx) > 80 || velocity > 0.9) steps = 1;
-    if (Math.abs(dx) > perSlide * 0.8 || velocity > 1.5) steps = 2;
+  let steps = 0;
+  if (Math.abs(dx) > 120 || velocity > 1.2) steps = 1;
+  if (Math.abs(dx) > perSlide * 0.9 || velocity > 1.8) steps = 2;
     if (dx > 0 && steps > 0) go(-steps);
     if (dx < 0 && steps > 0) go(steps);
     pointerStartX.current = null;
-    setDragDX(0);
+  if (dragRaf.current != null) cancelAnimationFrame(dragRaf.current);
+  dragRaf.current = requestAnimationFrame(() => setDragDX(0));
     setIsDragging(false);
     if (pauseOnHover) setTimeout(() => setIsHovered(false), 100);
     (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);

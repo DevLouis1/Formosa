@@ -35,7 +35,7 @@ export default function Portfolio() {
           ]}
           className="portfolio-carousel"
           autoplay
-          intervalMs={3600}
+          intervalMs={6500}
           pauseOnHover
         />
 
