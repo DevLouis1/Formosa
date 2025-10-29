@@ -1,0 +1,37 @@
+.contact-hint {
+  width: 100%;
+  padding: 24px 16px;
+  border-top: 1px solid rgba(169, 214, 228, 0.2);
+  background: linear-gradient(180deg, rgba(10, 31, 46, 0.3) 0%, rgba(10, 31, 46, 0.0) 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.contact-hint__inner {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #a9d6e4;
+  font-weight: 300;
+}
+
+.contact-hint__label { opacity: 0.9; }
+
+.contact-hint__link {
+  color: #dbe9f4;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(169, 214, 228, 0.6);
+}
+
+.contact-hint__link:hover {
+  color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .contact-hint { padding: 20px 12px; }
+  .contact-hint__inner { font-size: 14px; }
+}

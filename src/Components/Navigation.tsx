@@ -46,7 +46,7 @@ export default function Navigation() {
           <button onClick={() => scrollToSection('vision-mission')}>Vision & Mission</button>
           <button onClick={() => scrollToSection('services')}>Services</button>
           <button onClick={() => scrollToSection('portfolio')}>Portfolio</button>
-          <button onClick={() => scrollToSection('contributors')}>Contributors</button>
+          <button onClick={() => scrollToSection('contact')}>Contact</button>
         </div>
       </div>
     </nav>

@@ -5,7 +5,7 @@ import INTRO from './Components/Intro';
 import VisionMission from './Components/VisionMission';
 import Services from './Components/Services';
 import Portfolio from './Components/Portfolio';
-import Contributors from './Components/Contributors';
+import Footer from './Components/Footer';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,8 +45,8 @@ function App() {
       </div>
       <VisionMission />
       <Services />
-      <Portfolio />
-      <Contributors />
+  <Portfolio />
+  <Footer />
     </div>
   );
 }
