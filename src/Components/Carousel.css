@@ -11,6 +11,7 @@
   overflow: hidden;
   width: 100%;
   height: clamp(360px, 62vh, 840px); /* taller, more eye-catching */
+  cursor: grab;
 }
 
 .carousel-track {
@@ -18,6 +19,13 @@
   transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
 }
+
+.carousel-track.dragging,
+.carousel-track.no-transition {
+  transition: none !important;
+}
+
+.carousel-track.dragging { cursor: grabbing; }
 
 .slide {
   position: relative;
@@ -49,13 +57,19 @@
   z-index: 1;
   width: 100%;
   height: 100%; /* height-based layout so images aren't cut */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   border-radius: 18px;
   background: rgba(219, 233, 244, 0.05);
   border: 2px solid rgba(255, 158, 205, 0.28);
   overflow: hidden;
+}
+
+.media-inner {
+  width: 100%;
+  height: 100%;
+  padding: clamp(16px, 2.2vw, 28px);
+  display: grid;
+  place-items: center;
 }
 
 /* Animated gradient border glow */
@@ -112,58 +126,10 @@
 .chip { display: none; }
 
 /* Controls */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  background: rgba(27, 16, 51, 0.6);
-  border: 1px solid rgba(255, 158, 205, 0.35);
-  color: #ff9ecd;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.carousel-btn:hover {
-  transform: translateY(-50%) scale(1.06);
-  background: rgba(27, 16, 51, 0.75);
-  box-shadow: 0 0 22px rgba(255, 158, 205, 0.5);
-}
-
-.carousel-btn.prev { left: -6px; }
-.carousel-btn.next { right: -6px; }
+.carousel-btn { display: none !important; }
 
 /* Dots */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  display: inline-block;
-  border-radius: 50%;
-  background: rgba(255, 158, 205, 0.35);
-  border: 2px solid rgba(255, 158, 205, 0.7);
-  cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  aspect-ratio: 1 / 1; /* force perfect circle */
-}
-
-.dot.active {
-  background: #ff9ecd;
-  box-shadow: 0 0 0 4px rgba(255, 158, 205, 0.25), 0 0 14px rgba(255, 158, 205, 0.6);
-  transform: none; /* avoid any oval distortion */
-}
+.carousel-dots, .dot { display: none !important; }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {

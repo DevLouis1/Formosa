@@ -26,13 +26,17 @@ export default function Carousel({
   pauseOnHover = true,
   loop = true,
 }: CarouselProps) {
-  const [index, setIndex] = useState(startIndex);
+  const CLONES = 2; // number of clones on each side for seamless loop
+  const [position, setPosition] = useState(startIndex + (loop ? CLONES : 0));
   const [slidesPerView, setSlidesPerView] = useState(1);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef<number>(0);
   const touchStartTime = useRef<number>(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [dragDX, setDragDX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [noTransition, setNoTransition] = useState(false);
 
   // Determine slides per view responsively
   useEffect(() => {
@@ -50,46 +54,44 @@ export default function Carousel({
     return Math.max(0, images.length - slidesPerView);
   }, [images.length, slidesPerView]);
 
-  useEffect(() => {
-    // Clamp index when slidesPerView changes
-    setIndex((prev) => Math.min(prev, maxStartIndex));
-  }, [maxStartIndex]);
+  const extendedImages = useMemo(() => {
+    if (!loop) return images;
+    const head = images.slice(0, CLONES);
+    const tail = images.slice(-CLONES);
+    return [...tail, ...images, ...head];
+  }, [images, loop]);
 
-  const safeModulo = (value: number, mod: number) => {
-    if (mod <= 0) return 0;
-    return ((value % mod) + mod) % mod;
-  };
+  useEffect(() => {
+    // Clamp index when slidesPerView changes (non-looping only)
+    if (!loop) setPosition((prev) => Math.min(prev, maxStartIndex));
+  }, [maxStartIndex, loop]);
+
+  // helper removed (not needed with clone-based looping)
 
   const go = (delta: number) => {
-    setIndex((i) => {
-      const pages = maxStartIndex + 1; // total starting positions
-      if (pages <= 1) return 0;
-      if (loop) {
-        const target = safeModulo(i + delta, pages);
-        return target;
-      }
-      return Math.max(0, Math.min(i + delta, maxStartIndex));
-    });
+    if (loop) {
+      setPosition((i) => i + delta);
+    } else {
+      setPosition((i) => Math.max(0, Math.min(i + delta, maxStartIndex)));
+    }
   };
 
-  const next = () => go(1);
-  const prev = () => go(-1);
+  // next/prev controls removed along with arrow buttons
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
-  };
+  // keyboard navigation removed (no arrows/dots UI)
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchDeltaX.current = 0;
     touchStartTime.current = Date.now();
     if (pauseOnHover) setIsHovered(true);
+    setIsDragging(true);
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+    setDragDX(touchDeltaX.current);
   };
 
   const onTouchEnd = () => {
@@ -108,11 +110,47 @@ export default function Carousel({
     if (dx < 0 && steps > 0) go(steps);
     touchStartX.current = null;
     touchDeltaX.current = 0;
+    setDragDX(0);
+    setIsDragging(false);
     if (pauseOnHover) setTimeout(() => setIsHovered(false), 100);
   };
 
-  const pages = Math.max(1, images.length - slidesPerView + 1);
-  const currentPage = Math.min(index, pages - 1);
+  // Pointer (mouse/touch) dragging for desktop
+  const pointerStartX = useRef<number | null>(null);
+  const pointerStartTime = useRef<number>(0);
+  const onPointerDown = (e: React.PointerEvent) => {
+    pointerStartX.current = e.clientX;
+    pointerStartTime.current = Date.now();
+    setIsDragging(true);
+    setNoTransition(false);
+    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+    if (pauseOnHover) setIsHovered(true);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (pointerStartX.current == null) return;
+    const dx = e.clientX - pointerStartX.current;
+    setDragDX(dx);
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (pointerStartX.current == null) return;
+    const dx = e.clientX - pointerStartX.current;
+    const dt = Math.max(1, Date.now() - pointerStartTime.current);
+    const velocity = Math.abs(dx) / dt;
+    const width = containerRef.current?.offsetWidth ?? 0;
+    const perSlide = slidesPerView > 0 ? width / slidesPerView : width;
+    let steps = 0;
+    if (Math.abs(dx) > 50 || velocity > 0.6) steps = 1;
+    if (Math.abs(dx) > perSlide * 0.6 || velocity > 1.2) steps = 2;
+    if (dx > 0 && steps > 0) go(-steps);
+    if (dx < 0 && steps > 0) go(steps);
+    pointerStartX.current = null;
+    setDragDX(0);
+    setIsDragging(false);
+    if (pauseOnHover) setTimeout(() => setIsHovered(false), 100);
+    (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
+  };
+
+  // pagination UI removed; pages computed implicitly when needed elsewhere
 
   // Autoplay effect
   useEffect(() => {
@@ -125,61 +163,63 @@ export default function Carousel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoplay, pauseOnHover, isHovered, intervalMs, loop, maxStartIndex, slidesPerView]);
 
+  // After each transition, if looping with clones, snap back to the real index range without animation
+  const onTransitionEnd = () => {
+    if (!loop) return;
+    const total = images.length;
+    if (position >= total + CLONES) {
+      // jumped to clones at the end -> snap back
+      setNoTransition(true);
+      setPosition((p) => p - total);
+      requestAnimationFrame(() => setNoTransition(false));
+    } else if (position < CLONES) {
+      setNoTransition(true);
+      setPosition((p) => p + total);
+      requestAnimationFrame(() => setNoTransition(false));
+    }
+  };
+
   return (
     <div
       className={`carousel ${className ?? ''}`}
       ref={containerRef}
-      onKeyDown={onKeyDown}
-      tabIndex={0}
       style={{ ['--slides-per-view' as any]: String(slidesPerView) }}
       onMouseEnter={() => pauseOnHover && setIsHovered(true)}
       onMouseLeave={() => pauseOnHover && setIsHovered(false)}
-      onFocus={() => pauseOnHover && setIsHovered(true)}
-      onBlur={() => pauseOnHover && setIsHovered(false)}
+      // focus handlers not needed without keyboard controls
     >
-      <button className="carousel-btn prev" aria-label="Previous" onClick={prev}>
-        ‹
-      </button>
-
       <div
         className="carousel-viewport"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
         <div
-          className="carousel-track"
-          style={{ transform: `translateX(-${(index * 100) / slidesPerView}%)` }}
+          className={`carousel-track ${isDragging ? 'dragging' : ''} ${noTransition ? 'no-transition' : ''}`}
+          onTransitionEnd={onTransitionEnd}
+          style={{
+            transform: `translateX(calc(-${(position * 100) / slidesPerView}% + ${(dragDX / (containerRef.current?.offsetWidth || 1)) * 100}%))`,
+          }}
         >
-          {images.map((img, i) => (
+          {extendedImages.map((img, i) => (
             <div
               key={i}
               className={`slide ${img.kind === 'kanvasa' ? 'kanvasa' : ''}`}
               style={{ ['--bg-image' as any]: `url(${img.src})` }}
             >
               <div className="media-box">
-                <img src={img.src} alt={img.alt} loading="lazy" />
+                <div className="media-inner">
+                  <img src={img.src} alt={img.alt} loading="lazy" />
+                </div>
               </div>
               <span className="chip" aria-hidden="true">{img.alt}</span>
             </div>
           ))}
         </div>
-      </div>
-
-      <button className="carousel-btn next" aria-label="Next" onClick={next}>
-        ›
-      </button>
-
-      <div className="carousel-dots" role="tablist" aria-label="Slides">
-        {Array.from({ length: pages }).map((_, p) => (
-          <button
-            key={p}
-            role="tab"
-            aria-selected={p === currentPage}
-            className={`dot ${p === currentPage ? 'active' : ''}`}
-            onClick={() => setIndex(Math.min(p, maxStartIndex))}
-          />
-        ))}
       </div>
     </div>
   );
