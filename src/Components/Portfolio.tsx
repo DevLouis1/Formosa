@@ -1,5 +1,6 @@
 import './Portfolio.css';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useRef, useCallback } from 'react';
 import artboard1 from '../assets/Artboard 1@3x 1.png';
 import artboard2 from '../assets/Artboard 1_1@3x 1.png';
 import artboard3 from '../assets/Artboard 1_2@3x 1.png';
@@ -12,6 +13,24 @@ import Carousel from './Carousel';
 
 export default function Portfolio() {
   const { ref, isVisible } = useScrollAnimation(0.2);
+  const photoRef = useRef<HTMLDivElement | null>(null);
+
+  const onPhotoMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = photoRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width; // 0..1
+    const y = (e.clientY - rect.top) / rect.height; // 0..1
+    el.style.setProperty('--mx', x.toString());
+    el.style.setProperty('--my', y.toString());
+  }, []);
+
+  const onPhotoLeave = useCallback(() => {
+    const el = photoRef.current;
+    if (!el) return;
+    el.style.setProperty('--mx', '0.5');
+    el.style.setProperty('--my', '0.5');
+  }, []);
 
   return (
     <section 
@@ -40,7 +59,12 @@ export default function Portfolio() {
         />
 
         {/* Photography Full-Width Section */}
-        <div className="photography-full-section">
+        <div
+          className="photography-full-section"
+          ref={photoRef}
+          onMouseMove={onPhotoMove}
+          onMouseLeave={onPhotoLeave}
+        >
           <div className="photography-text-background">
             <div className="horizontal-text">PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY</div>
             <div className="horizontal-text">PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY PHOTOGRAPHY</div>

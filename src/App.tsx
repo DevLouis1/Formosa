@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Navigation from './Components/Navigation';
 import INTRO from './Components/Intro';
-import VisionMission from './Components/VisionMission';
-import Services from './Components/Services';
+import VisionHelp from './Components/VisionHelp';
 import Portfolio from './Components/Portfolio';
 import Footer from './Components/Footer';
 
@@ -44,8 +43,7 @@ function App() {
         <INTRO />
       </div>
       <Portfolio />
-      <VisionMission />
-      <Services />
+      <VisionHelp />
   <Footer />
     </div>
   );

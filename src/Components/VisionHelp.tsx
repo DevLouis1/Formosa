@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import './VisionHelp.css';
 
 const VisionHelp: React.FC = () => {
@@ -14,6 +14,30 @@ const VisionHelp: React.FC = () => {
     el.style.setProperty('--my', y.toString());
   }, []);
 
+  useEffect(() => {
+    const root = sectionRef.current;
+    if (!root) return;
+
+    const toReveal = Array.from(
+      root.querySelectorAll<HTMLElement>('.vh-reveal')
+    );
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+    );
+
+    toReveal.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
       className="vision-help-section"
@@ -24,13 +48,14 @@ const VisionHelp: React.FC = () => {
       <div className="vh-bg" aria-hidden />
 
       <div className="vh-inner container">
-        <header className="vh-header">
+        <header className="vh-header vh-reveal">
+          <div className="vh-aurora" aria-hidden />
           <h2 className="vh-super">Vision • Mission</h2>
           <p className="vh-kicker">Bold ideas. Clear execution. Real impact.</p>
         </header>
 
         <div className="vh-panels">
-          <article className="vh-panel vh-vision">
+          <article className="vh-panel vh-vision vh-reveal">
             <h3>Our Vision</h3>
             <p>
               Craft unforgettable brand stories that glow in culture — merging design, content,
@@ -38,7 +63,7 @@ const VisionHelp: React.FC = () => {
             </p>
           </article>
 
-          <article className="vh-panel vh-mission">
+          <article className="vh-panel vh-mission vh-reveal">
             <h3>Our Mission</h3>
             <p>
               Partner with founders and teams to turn ambitious ideas into polished realities —
@@ -47,16 +72,16 @@ const VisionHelp: React.FC = () => {
           </article>
         </div>
 
-        <div className="vh-divider" />
+        <div className="vh-divider vh-reveal" />
 
         <section className="vh-help" id="services" aria-label="How we can help">
-          <header className="vh-help-head">
+          <header className="vh-help-head vh-reveal">
             <h3>How we can help</h3>
             <p>From concept to launch — and the glow that follows.</p>
           </header>
 
           <div className="vh-cards">
-            <div className="vh-card">
+            <div className="vh-card vh-reveal">
               <div className="vh-card-title">Brand & Identity</div>
               <ul>
                 <li>Naming, voice, and strategy</li>
@@ -65,7 +90,7 @@ const VisionHelp: React.FC = () => {
               </ul>
             </div>
 
-            <div className="vh-card">
+            <div className="vh-card vh-reveal">
               <div className="vh-card-title">Web & Product</div>
               <ul>
                 <li>UX flows and prototypes</li>
@@ -74,7 +99,7 @@ const VisionHelp: React.FC = () => {
               </ul>
             </div>
 
-            <div className="vh-card">
+            <div className="vh-card vh-reveal">
               <div className="vh-card-title">Content & Campaigns</div>
               <ul>
                 <li>Photo/video production</li>
@@ -83,7 +108,7 @@ const VisionHelp: React.FC = () => {
               </ul>
             </div>
 
-            <div className="vh-card">
+            <div className="vh-card vh-reveal">
               <div className="vh-card-title">Motion & 3D</div>
               <ul>
                 <li>Micro-interactions</li>

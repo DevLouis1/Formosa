@@ -430,6 +430,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+        /* Interactive parallax defaults */
+        --mx: 0.5;
+        --my: 0.5;
+        --scale: 1;
+        perspective: 1000px;
 }
 /* Background scrolling text sits BEHIND image inside the full-width section */
 .photography-full-section .photography-text-background {
@@ -442,9 +447,46 @@
     flex-direction: column;
     justify-content: space-evenly;      /* evenly space 5 rows */
     padding: 0;                         /* allow maximum vertical space */
-    z-index: 0; /* behind image */
+        z-index: 1; /* behind image, above grid */
     pointer-events: none;
-    
+        /* subtle parallax shift on mouse move */
+        transform: translateY(calc((var(--my, 0.5) - 0.5) * 40px));
+        transition: transform 120ms ease-out;
+}
+
+/* Futuristic grid + vignette for extra depth */
+.photography-full-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(1200px 700px at 50% 50%, rgba(123, 62, 200, 0.08), transparent 60%),
+            repeating-linear-gradient(
+                to right,
+                rgba(255, 158, 205, 0.05) 0px,
+                rgba(255, 158, 205, 0.05) 1px,
+                transparent 1px,
+                transparent 24px
+            ),
+            repeating-linear-gradient(
+                to bottom,
+                rgba(143, 69, 210, 0.045) 0px,
+                rgba(143, 69, 210, 0.045) 1px,
+                transparent 1px,
+                transparent 24px
+            );
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+}
+
+.photography-full-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(800px 500px at 50% 100%, rgba(0, 0, 0, 0.35), transparent 60%);
+        pointer-events: none;
+        z-index: 2; /* slight vignette above text, below image */
 }
 
 /* Each row is a long, outlined word repeated across the width */
@@ -467,7 +509,8 @@
         0 0 10px rgba(255, 158, 205, 0.6),
         0 0 20px rgba(143, 69, 210, 0.5),
         0 0 35px rgba(255, 158, 205, 0.45);
-    animation: scroll-horizontal 30s linear infinite;
+    /* scroll + neon glow flicker */
+    animation: scroll-horizontal 30s linear infinite, neon 7.5s ease-in-out infinite;
     will-change: transform;
 }
 
@@ -493,16 +536,22 @@
 /* Better image fit: scale with viewport but keep margins on mobile */
 .photography-image {
         position: relative;
-        z-index: 3; /* above background text */
+    z-index: 3; /* above background text */
         max-width: min(900px, 80vw);
         width: 100%;
         height: auto;
         object-fit: contain;
+    transform: translateZ(0) rotateX(calc((0.5 - var(--my, 0.5)) * 8deg)) rotateY(calc((var(--mx, 0.5) - 0.5) * 10deg)) scale(var(--scale));
+    transition: transform 180ms ease-out, filter 220ms ease-out;
+    will-change: transform, filter;
+    filter: drop-shadow(0 10px 40px rgba(143, 69, 210, 0.35)) drop-shadow(0 0 30px rgba(255, 158, 205, 0.25));
 }
 
 @media (max-width: 768px) {
     .photography-image {
         max-width: 92vw;
+        transform: none !important; /* avoid tilt on small touch devices */
+        filter: none;
     }
 }
 
@@ -521,30 +570,23 @@
 }
 
 .horizontal-text:nth-child(1) {
-    animation-duration: 30s;
-    animation-delay: 0s;
+    animation: scroll-horizontal 30s linear infinite, neon 7.2s ease-in-out infinite;
 }
 
 .horizontal-text:nth-child(2) {
-    animation-duration: 36s;
-    animation-delay: -5s;
-    animation-direction: reverse;
+    animation: scroll-horizontal 36s linear infinite reverse, neon 8.1s ease-in-out infinite;
 }
 
 .horizontal-text:nth-child(3) {
-    animation-duration: 34s;
-    animation-delay: -8s;
+    animation: scroll-horizontal 34s linear infinite, neon 6.6s ease-in-out infinite;
 }
 
 .horizontal-text:nth-child(4) {
-    animation-duration: 38s;
-    animation-delay: -12s;
-    animation-direction: reverse;
+    animation: scroll-horizontal 38s linear infinite reverse, neon 8.8s ease-in-out infinite;
 }
 
 .horizontal-text:nth-child(5) {
-    animation-duration: 19s;
-    animation-delay: -20s;
+    animation: scroll-horizontal 19s linear infinite, neon 7.9s ease-in-out infinite;
 }
 
 @keyframes scroll-horizontal {
@@ -555,6 +597,41 @@
         transform: translateX(-50%);
     }
 }
+
+/* Neon glow flicker */
+@keyframes neon {
+    0%, 100% {
+        text-shadow:
+            0 0 3px rgba(255, 158, 205, 0.95),
+            0 0 10px rgba(255, 158, 205, 0.6),
+            0 0 20px rgba(143, 69, 210, 0.5),
+            0 0 35px rgba(255, 158, 205, 0.45);
+    }
+    45% {
+        text-shadow:
+            0 0 6px rgba(255, 158, 205, 0.95),
+            0 0 24px rgba(255, 158, 205, 0.75),
+            0 0 46px rgba(143, 69, 210, 0.6),
+            0 0 70px rgba(255, 158, 205, 0.55);
+    }
+    50% {
+        text-shadow:
+            0 0 2px rgba(255, 158, 205, 0.9),
+            0 0 8px rgba(255, 158, 205, 0.55),
+            0 0 16px rgba(143, 69, 210, 0.45),
+            0 0 24px rgba(255, 158, 205, 0.4);
+    }
+    70% {
+        text-shadow:
+            0 0 10px rgba(255, 158, 205, 1),
+            0 0 30px rgba(255, 158, 205, 0.85),
+            0 0 60px rgba(143, 69, 210, 0.65),
+            0 0 90px rgba(255, 158, 205, 0.6);
+    }
+}
+
+/* On hover, nudge scale for extra presence */
+.photography-full-section:hover { --scale: 1.02; }
 
 /* duplicate photography-image block removed to avoid conflicting max-width */
 
