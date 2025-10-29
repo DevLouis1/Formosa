@@ -2,7 +2,7 @@
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: min(1400px, 92vw);
   margin: 0 auto 40px auto;
   outline: none;
 }
@@ -10,6 +10,7 @@
 .carousel-viewport {
   overflow: hidden;
   width: 100%;
+  height: clamp(360px, 62vh, 840px); /* taller, more eye-catching */
 }
 
 .carousel-track {
@@ -25,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 /* Blurred background fill to harmonize mixed aspect ratios */
@@ -35,8 +37,8 @@
   background-image: var(--bg-image);
   background-position: center;
   background-size: cover;
-  filter: blur(24px) saturate(1.2);
-  opacity: 0.22;
+  filter: blur(18px) saturate(1.1);
+  opacity: 0.1; /* cleaner, less busy */
   transform: scale(1.12);
   border-radius: 18px;
   z-index: 0;
@@ -46,9 +48,10 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  display: grid;
-  place-items: center;
+  height: 100%; /* height-based layout so images aren't cut */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 18px;
   background: rgba(219, 233, 244, 0.05);
   border: 2px solid rgba(255, 158, 205, 0.28);
@@ -81,8 +84,9 @@
 }
 
 .slide img {
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: 100%;
   object-fit: contain;
   display: block;
   transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
@@ -95,28 +99,17 @@
 
 /* Kanvasa symmetric sizing */
 .slide.kanvasa img {
-  width: 85%;
-  height: 85%;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
 /* Subtle label chip */
-.chip {
-  position: absolute;
-  left: 24px;
-  bottom: 18px;
-  z-index: 2;
-  font-size: 12px;
-  color: #efe6ff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(27, 16, 51, 0.5);
-  border: 1px solid rgba(255, 158, 205, 0.35);
-  backdrop-filter: blur(6px);
-  opacity: 0.85;
-}
+/* Hide chip for a cleaner look */
+.chip { display: none; }
 
 /* Controls */
 .carousel-btn {
@@ -150,24 +143,26 @@
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
   border-radius: 50%;
   background: rgba(255, 158, 205, 0.35);
-  border: 1px solid rgba(255, 158, 205, 0.5);
+  border: 2px solid rgba(255, 158, 205, 0.7);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  aspect-ratio: 1 / 1; /* force perfect circle */
 }
 
 .dot.active {
   background: #ff9ecd;
-  box-shadow: 0 0 14px rgba(255, 158, 205, 0.6);
-  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(255, 158, 205, 0.25), 0 0 14px rgba(255, 158, 205, 0.6);
+  transform: none; /* avoid any oval distortion */
 }
 
 /* Mobile adjustments */
@@ -175,7 +170,7 @@
   .carousel {
     margin: 0 auto 24px auto;
   }
-  .media-box { aspect-ratio: 4 / 3; }
+  .carousel-viewport { height: clamp(280px, 56vh, 620px); }
   .slide { padding: 12px; }
   .carousel-btn.prev { left: 4px; }
   .carousel-btn.next { right: 4px; }

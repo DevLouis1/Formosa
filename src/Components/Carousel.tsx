@@ -38,9 +38,8 @@ export default function Carousel({
   useEffect(() => {
     const compute = () => {
       const w = window.innerWidth;
-      if (w < 640) setSlidesPerView(1);
-      else if (w < 1024) setSlidesPerView(2);
-      else setSlidesPerView(3);
+      if (w < 1400) setSlidesPerView(1);
+      else setSlidesPerView(2); // very wide screens can show two cleanly
     };
     compute();
     window.addEventListener('resize', compute);
