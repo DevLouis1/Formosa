@@ -51,7 +51,7 @@
 }
 
 .nav-links button {
-    font-size: clamp(14px, 1.5vw, 16px);
+    font-size: clamp(14px, 1.6vw, 17px);
     color: #efe6ff;
     background: none;
     border: none;
@@ -59,11 +59,12 @@
     position: relative;
     padding: 8px 12px;
     transition: all 0.3s ease;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.8px;
     font-family: inherit;
     text-transform: uppercase;
     font-size: 13px;
+    text-shadow: 0 0 10px rgba(255, 158, 205, 0.25);
 }
 
 .nav-links button::before {
@@ -87,14 +88,14 @@
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(90deg, #ff9ecd, #7b3ec8);
     transition: width 0.3s ease;
 }
 
 .nav-links button:hover {
     color: #ff9ecd;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 .nav-links button:hover::before {

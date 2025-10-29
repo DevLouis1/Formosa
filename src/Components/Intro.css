@@ -82,7 +82,7 @@
     z-index: 1;
     animation: logo-reveal 2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     transition: transform 0.3s ease-out;
-    filter: drop-shadow(0 0 30px rgba(255, 158, 205, 0.2));
+    filter: drop-shadow(0 0 36px rgba(255, 158, 205, 0.35));
 }
 
 @keyframes logo-reveal {
@@ -104,16 +104,16 @@
 .IntroText {
     transform: translateY(-50%);
     font-size: clamp(28px, 5vw, 56px);
-    color: #dbe9f4;
+    color: #efe6ff;
     background: linear-gradient(90deg, 
         rgba(27, 16, 51, 0.12) 0%, 
         rgba(58, 28, 84, 0.15) 50%, 
         rgba(74, 30, 72, 0.12) 100%);
     backdrop-filter: blur(3px);
     border: none;
-    border-top: 1px solid rgba(255, 158, 205, 0.12);
-    border-bottom: 1px solid rgba(255, 158, 205, 0.12);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid rgba(255, 158, 205, 0.25);
+    border-bottom: 2px solid rgba(255, 158, 205, 0.25);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18), 0 0 24px rgba(255, 158, 205, 0.18);
     text-align: left;
     margin: 0;
     padding: clamp(30px, 5vh, 60px) clamp(20px, 8vw, 80px);
@@ -131,19 +131,22 @@
     border-radius: 0 30px 30px 0;
     z-index: 1000;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-shadow: 0 0 14px rgba(255, 158, 205, 0.4);
 }
 
 .IntroText:hover {
-    transform: translateY(-50%) translateX(5px);
-    box-shadow: 0 8px 40px rgba(255, 158, 205, 0.18);
-    border-color: rgba(255, 158, 205, 0.3);
+    transform: translateY(-50%) translateX(6px);
+    box-shadow: 0 10px 46px rgba(255, 158, 205, 0.22);
+    border-color: rgba(255, 158, 205, 0.4);
 }
 
 .IntroText p {
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.45;
     padding-bottom: 0.1em;
     color: #efe6ff;
+    font-weight: 400;
+    text-shadow: 0 0 10px rgba(255, 158, 205, 0.35);
 }
 
 @keyframes gradient-shift {
@@ -157,7 +160,8 @@
 
 .chinese-intro {
     font-size: clamp(16px, 2.5vw, 28px);
-    opacity: 0.9;
+    opacity: 0.95;
+    font-weight: 400;
     margin-top: 10px !important;
 }
 .text-background {

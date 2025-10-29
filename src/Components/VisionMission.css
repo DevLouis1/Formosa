@@ -59,7 +59,7 @@
     flex: 1;
     background: rgba(219, 233, 244, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 158, 205, 0.2);
+    border: 2px solid rgba(255, 158, 205, 0.28);
     border-radius: 20px;
     padding: clamp(40px, 5vw, 60px);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -91,20 +91,21 @@
 .mission-box:hover {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 
-        0 25px 70px rgba(255, 158, 205, 0.25),
-        0 0 40px rgba(255, 158, 205, 0.12) inset;
-    border-color: rgba(255, 158, 205, 0.5);
+        0 30px 80px rgba(255, 158, 205, 0.32),
+        0 0 50px rgba(255, 158, 205, 0.16) inset;
+    border-color: rgba(255, 158, 205, 0.6);
 }
 
 .vision-box h2,
 .mission-box h2 {
     font-size: clamp(32px, 4vw, 48px);
-    font-weight: 300;
-    color: #dbe9f4;
+    font-weight: 500;
+    color: #efe6ff;
     margin-bottom: 20px;
     letter-spacing: 1px;
     position: relative;
     display: inline-block;
+    text-shadow: 0 0 16px rgba(255, 158, 205, 0.5);
 }
 
 .vision-box h2::after,
@@ -114,7 +115,7 @@
     bottom: -8px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(90deg, #ff9ecd, transparent);
     transition: width 0.6s ease;
 }
@@ -128,8 +129,8 @@
 .mission-box p {
     font-size: clamp(16px, 2vw, 18px);
     line-height: 1.8;
-    color: #e8dcff;
-    font-weight: 300;
+    color: #f2eaff;
+    font-weight: 400;
 }
 
 .divider {
