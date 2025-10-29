@@ -43,9 +43,9 @@ function App() {
       <div id="intro">
         <INTRO />
       </div>
+      <Portfolio />
       <VisionMission />
       <Services />
-  <Portfolio />
   <Footer />
     </div>
   );
