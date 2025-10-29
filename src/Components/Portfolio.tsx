@@ -8,6 +8,7 @@ import group4 from '../assets/Group 4 (1).png';
 import kanvasaCup from '../assets/Cup & Business Card Kanvasa (1) 1.png';
 import kanvasaCard from '../assets/kanvasa Business card 1.png';
 import kanvasaSign from '../assets/Kanvasa Sign Store 1.png';
+import Carousel from './Carousel';
 
 export default function Portfolio() {
   const { ref, isVisible } = useScrollAnimation(0.2);
@@ -22,29 +23,21 @@ export default function Portfolio() {
         <h2 className="portfolio-title">Portfolio</h2>
         <p className="portfolio-subtitle">作品集</p>
         
-        <div className="portfolio-content">
-          <div className="portfolio-item featured">
-            <img src={artboard4} alt="Artboard 4" />
-          </div>
-          <div className="portfolio-item">
-            <img src={artboard1} alt="Artboard 1" />
-          </div>
-          <div className="portfolio-item">
-            <img src={artboard2} alt="Artboard 2" />
-          </div>
-          <div className="portfolio-item">
-            <img src={artboard3} alt="Artboard 3" />
-          </div>
-          <div className="portfolio-item kanvasa-item">
-            <img src={kanvasaCup} alt="Kanvasa Cup & Business Card" />
-          </div>
-          <div className="portfolio-item kanvasa-item">
-            <img src={kanvasaCard} alt="Kanvasa Business Card" />
-          </div>
-          <div className="portfolio-item kanvasa-item">
-            <img src={kanvasaSign} alt="Kanvasa Sign Store" />
-          </div>
-        </div>
+        <Carousel
+          images={[
+            { src: artboard4, alt: 'Artboard 4' },
+            { src: artboard1, alt: 'Artboard 1' },
+            { src: artboard2, alt: 'Artboard 2' },
+            { src: artboard3, alt: 'Artboard 3' },
+            { src: kanvasaCup, alt: 'Kanvasa Cup & Business Card', kind: 'kanvasa' },
+            { src: kanvasaCard, alt: 'Kanvasa Business Card', kind: 'kanvasa' },
+            { src: kanvasaSign, alt: 'Kanvasa Sign Store', kind: 'kanvasa' },
+          ]}
+          className="portfolio-carousel"
+          autoplay
+          intervalMs={3600}
+          pauseOnHover
+        />
 
         {/* Photography Full-Width Section */}
         <div className="photography-full-section">

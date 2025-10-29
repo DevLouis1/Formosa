@@ -142,13 +142,7 @@
 }
 
 .portfolio-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
-    position: relative;
+    display: none; /* replaced by carousel */
 }
 
 /* Decorative floating elements */
@@ -373,10 +367,7 @@
     filter: brightness(1.06) contrast(1.05) saturate(1.2);
 }
 
-.portfolio-container.animate .portfolio-content {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* carousel appears immediately, internal animations handled by component */
 
 
 .description {
@@ -524,7 +515,10 @@
 }
 
 /* Hover should not change animation state */
-/* (No rule here on purpose — keep scrolling on hover) */
+/* Pause the background scroll when hovering the full-width section */
+.photography-full-section:hover .horizontal-text {
+    animation-play-state: paused;
+}
 
 .horizontal-text:nth-child(1) {
     animation-duration: 30s;
