@@ -5,11 +5,11 @@
     justify-content: center;
     padding: 100px 40px 40px 40px;
     background: linear-gradient(135deg, 
-        #0a1f2e 0%, 
-        #1a3a4a 25%,
-        #203a43 50%, 
-        #2c5364 75%,
-        #1e4e5c 100%);
+        #0e0a1f 0%, 
+        #1b1033 25%,
+        #2a184a 50%, 
+        #3a1c54 75%,
+        #4a1e48 100%);
     scroll-margin-top: 80px;
     position: relative;
     overflow: hidden;
@@ -20,7 +20,7 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(169, 214, 228, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 158, 205, 0.1) 0%, transparent 70%);
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -59,7 +59,7 @@
     flex: 1;
     background: rgba(219, 233, 244, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(169, 214, 228, 0.2);
+    border: 1px solid rgba(255, 158, 205, 0.2);
     border-radius: 20px;
     padding: clamp(40px, 5vw, 60px);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -75,7 +75,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(169, 214, 228, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 158, 205, 0.18) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.6s ease, transform 0.6s ease;
     pointer-events: none;
@@ -91,9 +91,9 @@
 .mission-box:hover {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 
-        0 25px 70px rgba(169, 214, 228, 0.25),
-        0 0 40px rgba(169, 214, 228, 0.1) inset;
-    border-color: rgba(169, 214, 228, 0.5);
+        0 25px 70px rgba(255, 158, 205, 0.25),
+        0 0 40px rgba(255, 158, 205, 0.12) inset;
+    border-color: rgba(255, 158, 205, 0.5);
 }
 
 .vision-box h2,
@@ -115,7 +115,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #a9d6e4, transparent);
+    background: linear-gradient(90deg, #ff9ecd, transparent);
     transition: width 0.6s ease;
 }
 
@@ -128,7 +128,7 @@
 .mission-box p {
     font-size: clamp(16px, 2vw, 18px);
     line-height: 1.8;
-    color: #a9d6e4;
+    color: #e8dcff;
     font-weight: 300;
 }
 
@@ -136,8 +136,8 @@
     width: 1px;
     background: linear-gradient(to bottom, 
         transparent,
-        rgba(169, 214, 228, 0.3) 20%,
-        rgba(169, 214, 228, 0.3) 80%,
+        rgba(255, 158, 205, 0.3) 20%,
+        rgba(255, 158, 205, 0.3) 80%,
         transparent
     );
     position: relative;
@@ -153,7 +153,7 @@
     height: 100%;
     background: linear-gradient(to bottom,
         transparent,
-        rgba(169, 214, 228, 0.8),
+        rgba(255, 158, 205, 0.8),
         transparent
     );
     animation: shimmer-vertical 3s ease-in-out infinite;
@@ -194,8 +194,8 @@
         height: 1px;
         background: linear-gradient(to right, 
             transparent,
-            rgba(169, 214, 228, 0.3) 20%,
-            rgba(169, 214, 228, 0.3) 80%,
+            rgba(255, 158, 205, 0.3) 20%,
+            rgba(255, 158, 205, 0.3) 80%,
             transparent
         );
     }

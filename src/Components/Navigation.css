@@ -4,10 +4,10 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(15, 32, 39, 0.85);
+    background: rgba(27, 16, 51, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(169, 214, 228, 0.1);
+    border-bottom: 1px solid rgba(255, 158, 205, 0.15);
     transition: transform 0.3s ease;
 }
 
@@ -52,7 +52,7 @@
 
 .nav-links button {
     font-size: clamp(14px, 1.5vw, 16px);
-    color: #dbe9f4;
+    color: #efe6ff;
     background: none;
     border: none;
     cursor: pointer;
@@ -73,7 +73,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(169, 214, 228, 0.1);
+    background: rgba(255, 158, 205, 0.08);
     border-radius: 6px;
     transform: scaleX(0);
     transition: transform 0.3s ease;
@@ -88,12 +88,12 @@
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #a9d6e4, #dbe9f4);
+    background: linear-gradient(90deg, #ff9ecd, #7b3ec8);
     transition: width 0.3s ease;
 }
 
 .nav-links button:hover {
-    color: #a9d6e4;
+    color: #ff9ecd;
     transform: translateY(-2px);
 }
 

@@ -1,8 +1,8 @@
 .contact-hint {
   width: 100%;
   padding: 24px 16px;
-  border-top: 1px solid rgba(169, 214, 228, 0.2);
-  background: linear-gradient(180deg, rgba(10, 31, 46, 0.3) 0%, rgba(10, 31, 46, 0.0) 100%);
+  border-top: 1px solid rgba(255, 158, 205, 0.2);
+  background: linear-gradient(180deg, rgba(27, 16, 51, 0.3) 0%, rgba(27, 16, 51, 0.0) 100%);
   display: flex;
   justify-content: center;
 }
@@ -14,16 +14,16 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: #a9d6e4;
+  color: #e8dcff;
   font-weight: 300;
 }
 
 .contact-hint__label { opacity: 0.9; }
 
 .contact-hint__link {
-  color: #dbe9f4;
+  color: #ff9ecd;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(169, 214, 228, 0.6);
+  border-bottom: 1px dashed rgba(255, 158, 205, 0.6);
 }
 
 .contact-hint__link:hover {
