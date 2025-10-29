@@ -95,7 +95,7 @@ export default function Carousel({
   };
 
   const onTouchEnd = () => {
-    const threshold = 50; // px
+    const threshold = 80; // require a bit more distance
     const dx = touchDeltaX.current;
     const dt = Math.max(1, Date.now() - touchStartTime.current); // ms
     const velocity = Math.abs(dx) / dt; // px per ms
@@ -103,8 +103,8 @@ export default function Carousel({
     const width = containerRef.current?.offsetWidth ?? 0;
     const perSlide = slidesPerView > 0 ? width / slidesPerView : width;
     let steps = 0;
-    if (Math.abs(dx) > threshold || velocity > 0.6) steps = 1;
-    if (Math.abs(dx) > perSlide * 0.6 || velocity > 1.2) steps = 2;
+    if (Math.abs(dx) > threshold || velocity > 0.9) steps = 1;
+    if (Math.abs(dx) > perSlide * 0.8 || velocity > 1.5) steps = 2;
 
     if (dx > 0 && steps > 0) go(-steps);
     if (dx < 0 && steps > 0) go(steps);
@@ -139,8 +139,8 @@ export default function Carousel({
     const width = containerRef.current?.offsetWidth ?? 0;
     const perSlide = slidesPerView > 0 ? width / slidesPerView : width;
     let steps = 0;
-    if (Math.abs(dx) > 50 || velocity > 0.6) steps = 1;
-    if (Math.abs(dx) > perSlide * 0.6 || velocity > 1.2) steps = 2;
+    if (Math.abs(dx) > 80 || velocity > 0.9) steps = 1;
+    if (Math.abs(dx) > perSlide * 0.8 || velocity > 1.5) steps = 2;
     if (dx > 0 && steps > 0) go(-steps);
     if (dx < 0 && steps > 0) go(steps);
     pointerStartX.current = null;

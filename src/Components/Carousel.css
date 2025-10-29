@@ -5,6 +5,7 @@
   max-width: min(1400px, 92vw);
   margin: 0 auto 40px auto;
   outline: none;
+  --inner-pad: clamp(16px, 2.2vw, 28px);
 }
 
 .carousel-viewport {
@@ -57,7 +58,9 @@
   z-index: 1;
   width: 100%;
   height: 100%; /* height-based layout so images aren't cut */
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 18px;
   background: rgba(219, 233, 244, 0.05);
   border: 2px solid rgba(255, 158, 205, 0.28);
@@ -67,7 +70,6 @@
 .media-inner {
   width: 100%;
   height: 100%;
-  padding: clamp(16px, 2.2vw, 28px);
   display: grid;
   place-items: center;
 }
@@ -99,8 +101,9 @@
 
 .slide img {
   width: auto;
-  height: 100%;
-  max-width: 100%;
+  height: auto;
+  max-height: calc(100% - var(--inner-pad) * 2);
+  max-width: calc(100% - var(--inner-pad) * 2);
   object-fit: contain;
   display: block;
   transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
@@ -135,6 +138,7 @@
 @media (max-width: 768px) {
   .carousel {
     margin: 0 auto 24px auto;
+    --inner-pad: clamp(12px, 2vw, 20px);
   }
   .carousel-viewport { height: clamp(280px, 56vh, 620px); }
   .slide { padding: 12px; }
