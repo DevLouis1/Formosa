@@ -58,17 +58,25 @@ const VisionHelp: React.FC = () => {
           <article className="vh-panel vh-vision vh-reveal">
             <h3>Our Vision</h3>
             <p>
-              Craft unforgettable brand stories that glow in culture — merging design, content,
-              and motion to move people emotionally and commercially.
+            To be the go-to partner that turns ideas into powerful brands and real business growth
+           
             </p>
+            <p className="vh-zh">
+            成為將創意轉化為強大品牌和實際業務成長的可靠合作夥伴
+            </p>
+            
           </article>
 
           <article className="vh-panel vh-mission vh-reveal">
             <h3>Our Mission</h3>
-            <p>
-              Partner with founders and teams to turn ambitious ideas into polished realities —
-              fast, collaborative, and relentlessly creative.
+             <p>
+            We help businesses stand out and grow through smart design, solid strategy, and impactful digital presence 
+           
             </p>
+            <p className="vh-zh">
+            我們透過智慧設計、穩健策略和有影響力的數位形象幫助企業脫穎而出並實現發展
+            </p>
+            
           </article>
         </div>
 
@@ -82,39 +90,23 @@ const VisionHelp: React.FC = () => {
 
           <div className="vh-cards">
             <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Brand & Identity</div>
-              <ul>
-                <li>Naming, voice, and strategy</li>
-                <li>Logo systems and guidelines</li>
-                <li>Art direction and styleframes</li>
-              </ul>
+              <div className="vh-card-title">Website Design</div>
+              <div className="vh-card-subtitle zh">網站設計</div>
             </div>
 
             <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Web & Product</div>
-              <ul>
-                <li>UX flows and prototypes</li>
-                <li>Websites with performance</li>
-                <li>Design systems and docs</li>
-              </ul>
+              <div className="vh-card-title">Media Social Design</div>
+              <div className="vh-card-subtitle zh">媒體社群設計</div>
             </div>
 
             <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Content & Campaigns</div>
-              <ul>
-                <li>Photo/video production</li>
-                <li>Social kits and templates</li>
-                <li>Launch creative and ads</li>
-              </ul>
+              <div className="vh-card-title">Brand Development</div>
+              <div className="vh-card-subtitle zh">品牌發展</div>
             </div>
 
             <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Motion & 3D</div>
-              <ul>
-                <li>Micro-interactions</li>
-                <li>Animated explainers</li>
-                <li>3D visuals and renders</li>
-              </ul>
+              <div className="vh-card-title">Photography</div>
+              <div className="vh-card-subtitle zh">攝影</div>
             </div>
           </div>
         </section>

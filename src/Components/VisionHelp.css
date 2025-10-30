@@ -122,6 +122,13 @@
   line-height: 1.6;
 }
 
+/* Mandarin (Chinese) paragraphs: slightly smaller for visual hierarchy */
+.vh-panel p.vh-zh {
+  font-size: clamp(12px, 1.8vw, 16px);
+  color: #fff;
+  line-height: 1.7;
+}
+
 .vh-divider {
   height: 1px;
   margin: clamp(24px, 4vw, 48px) 0;
@@ -223,6 +230,17 @@
 
 @media (max-width: 600px) {
   .vh-help-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+/* Smaller Mandarin subtitle under the main title */
+.vh-card-subtitle {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.vh-card-subtitle.zh {
+  font-size: clamp(12px, 1.7vw, 15px);
+  letter-spacing: 0.3px;
+  color: #fff;
+}
   .vh-cards { grid-template-columns: 1fr; }
 }
 

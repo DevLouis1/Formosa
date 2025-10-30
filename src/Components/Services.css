@@ -175,27 +175,39 @@
 }
 
 .service-card h3 {
-    font-size: clamp(20px, 2.5vw, 28px);
-    font-weight: 500;
-    color: #efe6ff;
-    margin-bottom: 15px;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+    margin: 0;
 }
 
-.service-card:hover h3 {
+/* Titles block */
+.service-titles { display: grid; gap: 6px; }
+.service-title-en.primary,
+.service-title-zh.primary {
+    font-size: clamp(20px, 2.6vw, 28px);
+    font-weight: 700;
+    color: #efe6ff;
+    letter-spacing: 0.6px;
+    text-shadow: 0 0 18px rgba(255, 158, 205, 0.35);
+}
+.service-title-en.secondary,
+.service-title-zh.secondary {
+    font-size: clamp(14px, 1.8vw, 16px);
+    color: #ff9ecd;
+    letter-spacing: 0.4px;
+    opacity: 0.95;
+}
+.service-title-zh.primary { color: #fff; }
+.service-title-zh.secondary { color: #fff; }
+.service-card:hover .service-title-en.primary,
+.service-card:hover .service-title-zh.primary {
     color: #ff9ecd;
     transform: translateX(5px);
     text-shadow: 0 0 24px rgba(255, 158, 205, 0.6);
+    transition: all 0.3s ease;
 }
 
-.service-card p {
-    font-size: clamp(14px, 1.5vw, 16px);
-    line-height: 1.6;
-    color: #f2eaff;
-    font-weight: 400;
-    opacity: 0.9;
-}
+/* Keep Chinese white even on hover if desired */
+.service-card:hover .service-title-zh.primary { color: #fff; }
+.service-card:hover .service-title-zh.secondary { color: #fff; }
 
 @keyframes fade-in {
     from {

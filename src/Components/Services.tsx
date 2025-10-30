@@ -6,24 +6,24 @@ export default function Services() {
 
   const services = [
     {
-      title: 'Logo Design',
-      description: 'Craft unique brand identities that leave lasting impressions',
-      icon: '✦'
-    },
-    {
       title: 'Website Design',
-      description: 'Build responsive, modern websites that captivate and convert',
-      icon: '⚡'
+      titleZh: '網站設計',
+      icon: '✦',
     },
     {
-      title: 'Branding',
-      description: 'Develop comprehensive brand strategies that resonate',
-      icon: '◆'
+      title: 'Media Social Design',
+      titleZh: '媒體社群設計',
+      icon: '⚡',
     },
     {
-      title: 'Digital Marketing',
-      description: 'Amplify your reach with strategic digital campaigns',
-      icon: '★'
+      title: 'Brand Development',
+      titleZh: '品牌發展',
+      icon: '◆',
+    },
+    {
+      title: 'Photography',
+      titleZh: '攝影',
+      icon: '★',
     }
   ];
 
@@ -38,17 +38,31 @@ export default function Services() {
         <p className="services-subtitle">我們能如何幫助您</p>
         
         <div className="services-grid">
-          {services.map((service, index) => (
-            <div 
-              key={index} 
-              className={`service-card ${isVisible ? 'animate' : ''}`}
-              style={{ transitionDelay: `${index * 0.1}s` }}
-            >
-              <div className="service-icon">{service.icon}</div>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-            </div>
-          ))}
+          {services.map((service, index) => {
+            const alt = index % 2 === 1; // alternate order
+            return (
+              <div
+                key={index}
+                className={`service-card ${isVisible ? 'animate' : ''}`}
+                style={{ transitionDelay: `${index * 0.1}s` }}
+              >
+                <div className="service-icon">{service.icon}</div>
+                <div className="service-titles">
+                  {alt ? (
+                    <>
+                      <h3 className="service-title-zh primary">{service.titleZh}</h3>
+                      <div className="service-title-en secondary">{service.title}</div>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="service-title-en primary">{service.title}</h3>
+                      <div className="service-title-zh secondary">{service.titleZh}</div>
+                    </>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
