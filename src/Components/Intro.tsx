@@ -2,6 +2,7 @@
 import { JSX } from 'react';
 import './Intro.css'
 import rectangleBg from '../assets/Rectangle.png'
+import glowLogo from '../assets/glow@3x 1.png'
 
 export default function INTRO(): JSX.Element {
 
@@ -19,10 +20,12 @@ export default function INTRO(): JSX.Element {
         <div className="formosa-horizontal-text">FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA FORMOSA</div>
       </div>
       
+      {/* Logo */}
+      <img src={glowLogo} alt="Formosa Logo" className='intro-logo' />
+      
       <div className='IntroText'>
-        <p>Imagine.</p>
-        <p>We Make it Happen.</p>
-        <p className='chinese-intro'>想像。我們助您實現夢想。</p>
+        <p>DEVELOP YOUR BUSINESS TO THE NEXT LEVEL</p>
+        <p className='chinese-intro'>將您的業務提升到新的水平</p>
       </div>
     </div>
   );
