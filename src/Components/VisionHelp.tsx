@@ -70,21 +70,21 @@ const VisionHelp: React.FC = () => {
           </header>
 
           <div className="vh-cards">
-            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${websiteDesignImg})`}}>
+            <div className="vh-card vh-reveal" style={{ backgroundImage: `url("${websiteDesignImg}")` }}>
               <div className="vh-card-surface">
                 <div className="vh-card-title">Website Design</div>
                 <div className="vh-card-subtitle zh">網站設計</div>
               </div>
             </div>
 
-            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${mediaSocialImg})`}}>
+            <div className="vh-card vh-reveal" style={{ backgroundImage: `url("${mediaSocialImg}")` }}>
               <div className="vh-card-surface">
                 <div className="vh-card-title">Media Social Design</div>
                 <div className="vh-card-subtitle zh">媒體社群設計</div>
               </div>
             </div>
 
-            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${brandDevImg})`}}>
+            <div className="vh-card vh-reveal" style={{ backgroundImage: `url("${brandDevImg}")` }}>
               <div className="vh-card-surface">
                 <div className="vh-card-title">Brand Development</div>
                 <div className="vh-card-subtitle zh">品牌發展</div>

@@ -18,7 +18,7 @@
   position: relative;
   width: 100%;
   min-height: clamp(800px, 80vw, 1400px);
-  margin: clamp(24px,4vw,48px) 0 clamp(-288px,-29vw,-144px) 0;
+  margin: clamp(24px,4vw,48px) 0 -380px 0; /* negative bottom margin to pull next section upward */
 }
 
 /* Image panels (Vision / Mission) - absolutely positioned for custom placement */
@@ -126,4 +126,39 @@
 @keyframes spin-slow {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Mobile layout fixes: stack images and remove absolute positioning */
+@media (max-width: 768px) {
+  .vh-divider2 {
+    position: relative;
+    min-height: clamp(860px, 165vw, 1480px);
+    margin: clamp(6px,2.4vw,12px) 0 -340px 0; /* negative bottom gap on mobile */
+    overflow: visible;
+  }
+
+  .vh-panel-image {
+    position: absolute;
+    left: 2%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: auto;
+    max-width: none;
+    display: block;
+  }
+
+  .vh-panel-image.vh-vision {
+    top: -20%;
+    left: -31%;
+    width: 240%;
+  }
+
+  .vh-panel-image.vh-mission {
+    /* push mission below vision; tune as needed */
+    top: 21%;
+    left: -44%;
+    width: 176%;
+    /* flip horizontally on phone */
+  
+  }
 }
