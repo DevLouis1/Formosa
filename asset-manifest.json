@@ -1,23 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.dfd6c0a2.css",
-    "main.js": "/static/js/main.e087e884.js",
+    "main.css": "/static/css/main.4b334b39.css",
+    "main.js": "/static/js/main.67229f05.js",
     "static/js/453.117b0875.chunk.js": "/static/js/453.117b0875.chunk.js",
-    "static/media/Artboard 1_3@3x 1.png": "/static/media/Artboard 1_3@3x 1.1458581868f3c0eb33dc.png",
-    "static/media/Artboard 1@3x 1.png": "/static/media/Artboard 1@3x 1.937b536c2d65d38e1e7e.png",
-    "static/media/Artboard 1_1@3x 1.png": "/static/media/Artboard 1_1@3x 1.d158f82e859cdef1de3d.png",
-    "static/media/Artboard 1_2@3x 1.png": "/static/media/Artboard 1_2@3x 1.49aeb01f3ecbc9827c62.png",
-    "static/media/Vector 2.png": "/static/media/Vector 2.fd465390dc4a6ae11f9a.png",
-    "static/media/Vector 1.png": "/static/media/Vector 1.c8a0ab177b6631c57922.png",
-    "static/media/Vector 3.png": "/static/media/Vector 3.3e4898318ad6eaecb979.png",
-    "static/media/Group 2 (1).png": "/static/media/Group 2 (1).562137e166192f98daab.png",
+    "static/media/Group 4 (1).png": "/static/media/Group 4 (1).b69bc99ea537e31f51f9.png",
+    "static/media/Rectangle.png": "/static/media/Rectangle.f50937a3800b6b2336e5.png",
+    "static/media/carousel1.png": "/static/media/carousel1.299dc369081784d35415.png",
+    "static/media/carousel3.png": "/static/media/carousel3.0011cc8b7e008780d60f.png",
+    "static/media/carousel5.png": "/static/media/carousel5.77aae01390f01d94c8bd.png",
+    "static/media/mission.png": "/static/media/mission.91cebd75f16d7e60fbe5.png",
+    "static/media/vision.png": "/static/media/vision.e6f113772e9063f1cb8f.png",
+    "static/media/media social design.png": "/static/media/media social design.8cd590a5fcb6e91f2704.png",
+    "static/media/glow@3x 1.png": "/static/media/glow@3x 1.d9b00d51c6484a404ad6.png",
+    "static/media/photograhy.png": "/static/media/photograhy.09f3e4f08082c6c9fd5a.png",
+    "static/media/carousel4.png": "/static/media/carousel4.617afd66cd7565bf11a7.png",
+    "static/media/website design.png": "/static/media/website design.809efde5c27a012268ba.png",
+    "static/media/brand development.png": "/static/media/brand development.8ffdb2b870f4d916347f.png",
+    "static/media/carousel2.png": "/static/media/carousel2.5155321b66652f5aa27b.png",
+    "static/media/carousel6.png": "/static/media/carousel6.91eb3fdbc756d45aeca2.png",
     "index.html": "/index.html",
-    "main.dfd6c0a2.css.map": "/static/css/main.dfd6c0a2.css.map",
-    "main.e087e884.js.map": "/static/js/main.e087e884.js.map",
+    "main.4b334b39.css.map": "/static/css/main.4b334b39.css.map",
+    "main.67229f05.js.map": "/static/js/main.67229f05.js.map",
     "453.117b0875.chunk.js.map": "/static/js/453.117b0875.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dfd6c0a2.css",
-    "static/js/main.e087e884.js"
+    "static/css/main.4b334b39.css",
+    "static/js/main.67229f05.js"
   ]
 }
