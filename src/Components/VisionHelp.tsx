@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import './VisionHelp.css';
+import visionImg from '../assets/vision.png';
+import missionImg from '../assets/mission.png';
+import websiteDesignImg from '../assets/website design.png';
+import mediaSocialImg from '../assets/media social design.png';
+import brandDevImg from '../assets/brand development.png';
+import photographyImg from '../assets/photograhy.png';
 
 const VisionHelp: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -53,35 +59,10 @@ const VisionHelp: React.FC = () => {
           <h2 className="vh-super">Vision • Mission</h2>
           <p className="vh-kicker">Bold ideas. Clear execution. Real impact.</p>
         </header>
-
-        <div className="vh-panels">
-          <article className="vh-panel vh-vision vh-reveal">
-            <h3>Our Vision</h3>
-            <p>
-            To be the go-to partner that turns ideas into powerful brands and real business growth
-           
-            </p>
-            <p className="vh-zh">
-            成為將創意轉化為強大品牌和實際業務成長的可靠合作夥伴
-            </p>
-            
-          </article>
-
-          <article className="vh-panel vh-mission vh-reveal">
-            <h3>Our Mission</h3>
-             <p>
-            We help businesses stand out and grow through smart design, solid strategy, and impactful digital presence 
-           
-            </p>
-            <p className="vh-zh">
-            我們透過智慧設計、穩健策略和有影響力的數位形象幫助企業脫穎而出並實現發展
-            </p>
-            
-          </article>
-        </div>
-
-        <div className="vh-divider vh-reveal" />
-
+        <div className="vh-divider2" >
+        <img src={visionImg} alt="Vision" className="vh-panel-image vh-vision vh-reveal" />
+        <img src={missionImg} alt="Mission" className="vh-panel-image vh-mission vh-reveal" />
+       </div>
         <section className="vh-help" id="services" aria-label="How we can help">
           <header className="vh-help-head vh-reveal">
             <h3>How we can help</h3>
@@ -89,24 +70,32 @@ const VisionHelp: React.FC = () => {
           </header>
 
           <div className="vh-cards">
-            <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Website Design</div>
-              <div className="vh-card-subtitle zh">網站設計</div>
+            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${websiteDesignImg})`}}>
+              <div className="vh-card-surface">
+                <div className="vh-card-title">Website Design</div>
+                <div className="vh-card-subtitle zh">網站設計</div>
+              </div>
             </div>
 
-            <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Media Social Design</div>
-              <div className="vh-card-subtitle zh">媒體社群設計</div>
+            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${mediaSocialImg})`}}>
+              <div className="vh-card-surface">
+                <div className="vh-card-title">Media Social Design</div>
+                <div className="vh-card-subtitle zh">媒體社群設計</div>
+              </div>
             </div>
 
-            <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Brand Development</div>
-              <div className="vh-card-subtitle zh">品牌發展</div>
+            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${brandDevImg})`}}>
+              <div className="vh-card-surface">
+                <div className="vh-card-title">Brand Development</div>
+                <div className="vh-card-subtitle zh">品牌發展</div>
+              </div>
             </div>
 
-            <div className="vh-card vh-reveal">
-              <div className="vh-card-title">Photography</div>
-              <div className="vh-card-subtitle zh">攝影</div>
+            <div className="vh-card vh-reveal" style={{backgroundImage:`url(${photographyImg})`}}>
+              <div className="vh-card-surface">
+                <div className="vh-card-title">Photography</div>
+                <div className="vh-card-subtitle zh">攝影</div>
+              </div>
             </div>
           </div>
         </section>

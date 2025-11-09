@@ -44,7 +44,7 @@ function App() {
       </div>
       <Portfolio />
       <VisionHelp />
-  <Footer />
+      <Footer />
     </div>
   );
 }
